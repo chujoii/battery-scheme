@@ -47,6 +47,9 @@
 
 
 
+; coding: utf-8
+(setlocale LC_ALL "en_US.UTF-8")
+
 (define (unique-list list)
   (define (element-of-set? x set)
     ;; from sicp

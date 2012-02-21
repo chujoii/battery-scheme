@@ -47,6 +47,9 @@
 
 
 
+; coding: utf-8
+(setlocale LC_ALL "en_US.UTF-8")
+
 (use-modules (ice-9 regex))
 
 (define (string-cut s start end)
