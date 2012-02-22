@@ -42,9 +42,10 @@
 
 
 ;; ------------ previous function not work with utf-8 
-(load "file-contents.scm")
 
+(load "file-contents.scm")
 (define (system-with-output-to-string command)
+  ;; fixme this fynction unsecure and generate temporary file (bad for ssd-disk)
   (let ((tmp-file (tmpnam)))
     (system (string-join (list command " > " tmp-file)))
     (let ((content-tmp-file (file-contents tmp-file)))
