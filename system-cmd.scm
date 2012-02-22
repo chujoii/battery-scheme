@@ -2,9 +2,9 @@
 (setlocale LC_ALL "en_US.UTF-8")
 
 
-(use-modules (ice-9 popen))
-(use-modules (ice-9 rdelim))
-;
+;;(use-modules (ice-9 popen))
+;;(use-modules (ice-9 rdelim))
+;;
 ;(define (system-with-output-to-string command)
   ;; read result of system call
   ;;
@@ -37,9 +37,6 @@
 ;(system "./a1.sh \"проверка\"") work
 
 
-; (define p (open-input-pipe "getfattr -n user.metatag \"/home/chujoii/project/xattr-tag/q/Предложение_по_популяризация_xattr.maff\""))
-; (set-port-encoding! (current-input-port) "utf-8")
-; (read-delimited "" p)
 
 
 
@@ -48,12 +45,10 @@
 (load "file-contents.scm")
 
 (define (system-with-output-to-string command)
-  (display "command=")(display command)(newline)
   (let ((tmp-file (tmpnam)))
     (system (string-join (list command " > " tmp-file)))
     (let ((content-tmp-file (file-contents tmp-file)))
-      ;;(delete-file tmp-file)
-      ;;(display command)(display "=")(display tmp-file)(display "=")(display content-tmp-file)(newline)
+      (delete-file tmp-file)
       content-tmp-file)))
 
 

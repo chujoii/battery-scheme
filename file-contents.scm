@@ -34,7 +34,7 @@
 	  (if (equal? content "")   ;; fixme : need remove (first OR last) unnecessary \n but this metod toooooo slow ? or not for big file
 	      (read-file-contents file-port line)
 	      (read-file-contents file-port (string-join (list content "\n" line) ""))))))
-
+  
   (let ((p (open-file filename "rb")))
     (set-port-encoding! p "UTF-8")
     (let ((contents (read-file-contents p "")))
