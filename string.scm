@@ -1,3 +1,5 @@
+; coding: utf-8
+
 ;;;; string.scm ---  some string functions
 
 
@@ -47,13 +49,14 @@
 
 
 
-; coding: utf-8
 (setlocale LC_ALL "en_US.UTF-8")
 
 (use-modules (ice-9 regex))
 
 (define (string-cut s start end)
   (let ((strlen (string-length s)))
-    (string-take (string-drop s start) (if (< end 0) 
-					   (+ strlen end -1)
-					   end))))
+    (string-drop (string-take s (if (< end 0) 
+				    (+ strlen end)
+				    end))
+		 start)))
+

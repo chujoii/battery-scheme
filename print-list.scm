@@ -1,3 +1,5 @@
+; coding: utf-8
+
 ;;;; print-list.scm ---  pretty print list
 
 
@@ -47,7 +49,6 @@
 
 
 
-; coding: utf-8
 (setlocale LC_ALL "en_US.UTF-8")
 
 (define (print-list-without-bracket list)

@@ -1,3 +1,5 @@
+; coding: utf-8
+
 ;;;; unique-list.scm ---  generate list contain unique element
 
 
@@ -47,7 +49,6 @@
 
 
 
-; coding: utf-8
 (setlocale LC_ALL "en_US.UTF-8")
 
 (define (unique-list list)
