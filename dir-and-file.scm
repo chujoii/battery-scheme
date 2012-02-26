@@ -49,10 +49,15 @@
 
 
 
+(define (write-to-file filename contents)
+  (define p-file (open-output-file filename))
+  (write contents p-file)
+  (close p-file))
+
 
 (define (create-if-not-exist-dir path)
   (if (not (file-exists? path))
-      (begin (check-exist-dir (dirname path))
+      (begin (create-if-not-exist-dir (dirname path))
 	     (mkdir path))))
 
 
@@ -61,8 +66,10 @@
   (if (not (file-exists? path))
        (write-to-file path contents)))
 
-(define (write-to-file filename contents)
-  (define p-file (open-output-file filename))
-  (write contents p-file)
-  (close p-file))
+
+(define (copy-if-not-exist-file oldpath newpath)
+  (create-if-not-exist-dir (dirname newpath))
+  (if (not (file-exists? newpath))
+       (copy-file oldpath newpath)))
+
 
