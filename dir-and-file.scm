@@ -1,6 +1,6 @@
 ; coding: utf-8
 
-;;;; print-list.scm ---  pretty print list
+;;;; dir-and-file.scm ---  operations with directory and file
 
 
 
@@ -29,7 +29,7 @@
 
 
 
-;;; Keywords: pretty print list
+;;; Keywords: create if not exist directory file wirite
 
 
 
@@ -41,7 +41,7 @@
 
 ;;; History:
 
-;; Version 0.1 was created at 2011.december.06
+;; Version 0.1 was created at 2012.february.26
 
 
 
@@ -49,15 +49,20 @@
 
 
 
-(setlocale LC_ALL "en_US.UTF-8")
 
-(define (print-list-without-bracket list)
-  ;; print single or two dimension list
-  (cond ((null? list)
-	 (newline))
-	((pair? list)
-	 (print-list-without-bracket (car list))
-	 (print-list-without-bracket (cdr list)))
-	(else
-	 (write list)
-	 (display " "))))
+(define (create-if-not-exist-dir path)
+  (if (not (file-exists? path))
+      (begin (check-exist-dir (dirname path))
+	     (mkdir path))))
+
+
+(define (create-if-not-exist-file path contents)
+  (create-if-not-exist-dir (dirname path))
+  (if (not (file-exists? path))
+       (write-to-file path contents)))
+
+(define (write-to-file filename contents)
+  (define p-file (open-output-file filename))
+  (write contents p-file)
+  (close p-file))
+
