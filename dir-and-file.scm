@@ -50,8 +50,15 @@
 
 
 (define (write-to-file filename contents)
+  ;; fixme dublication of code
   (define p-file (open-output-file filename))
   (write contents p-file)
+  (close p-file))
+
+(define (display-to-file filename contents)
+  ;; fixme dublication of code
+  (define p-file (open-output-file filename))
+  (display contents p-file)
   (close p-file))
 
 
@@ -61,10 +68,17 @@
 	     (mkdir path))))
 
 
-(define (create-if-not-exist-file path contents)
+(define (create-if-not-exist-file-with-write path contents)
+  ;; fixme dublication of code
   (create-if-not-exist-dir (dirname path))
   (if (not (file-exists? path))
        (write-to-file path contents)))
+
+(define (create-if-not-exist-file-with-display path contents)
+  ;; fixme dublication of code
+  (create-if-not-exist-dir (dirname path))
+  (if (not (file-exists? path))
+       (display-to-file path contents)))
 
 
 (define (copy-if-not-exist-file oldpath newpath)

@@ -49,8 +49,6 @@
 
 
 
-(setlocale LC_ALL "en_US.UTF-8")
-
 (define (print-list-without-bracket list)
   ;; print single or two dimension list
   (cond ((null? list)

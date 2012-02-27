@@ -1,6 +1,6 @@
 ; coding: utf-8
 
-;;;; unique-list.scm ---  generate list contain unique element
+;;;; flat-list.scm ---  generate flat list from tree
 
 
 
@@ -29,7 +29,7 @@
 
 
 
-;;; Keywords: unique list
+;;; Keywords: flat list
 
 
 
@@ -49,16 +49,9 @@
 
 
 
-
-(define (unique-list list)
-  (define (element-of-set? x set)
-    ;; from sicp
-    (cond ((null? set) #f)
-	  ((equal? x (car set)) #t)
-	  (else (element-of-set? x (cdr set)))))
-  
-  (define (unique src-list uniq-list)
-    (cond ((null? src-list) uniq-list)
-	  ((not (element-of-set? (car src-list) uniq-list)) (unique (cdr src-list) (cons (car src-list) uniq-list)))
-	  (else (unique (cdr src-list) uniq-list))))
-  (unique list nil))
+(define (2d-1d start-list)
+  (define (flat flat-list dim-list)
+    (if (null? dim-list)
+	flat-list
+	(flat (append flat-list (car dim-list)) (cdr dim-list))))
+  (flat (list) start-list))
