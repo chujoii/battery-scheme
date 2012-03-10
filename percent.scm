@@ -1,6 +1,6 @@
 ; coding: utf-8
 
-;;;; flat-list.scm ---  generate flat list from tree
+;;;; percent.scm --- calculate percentage
 
 
 
@@ -29,7 +29,7 @@
 
 
 
-;;; Keywords: flat list
+;;; Keywords: create if not exist directory file wirite
 
 
 
@@ -41,7 +41,7 @@
 
 ;;; History:
 
-;; Version 0.1 was created at 2012.february.12
+;; Version 0.1 was created at 2012.march.10
 
 
 
@@ -49,32 +49,6 @@
 
 
 
-(define (2d-1d start-list)
-  (define (flat flat-list dim-list)
-    (if (null? dim-list)
-	flat-list
-	(flat (append flat-list (car dim-list)) (cdr dim-list))))
-  (flat (list) start-list))
 
-
-
-
-
-(define (tree-to-flat start-list)
-  (define (flatiron tree-list flat-list)
-    ;;(display "flat-list=")(display flat-list)(display " tree-list=")(display tree-list)(newline)
-    (cond ((null? tree-list)
-	   flat-list)
-	  
-	  ((not (pair? tree-list))
-	   (cons tree-list flat-list))
-	  
-	  (else ;; fixme append->cons its posible?
-	   (append (flatiron (car tree-list) '())
-		   (flatiron (cdr tree-list) '())
-		   flat-list))))
-  
-  (flatiron start-list '()))
-
-
-
+(define (percent func x perc)
+  (func x (* (/ x 100.0) perc)))

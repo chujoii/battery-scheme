@@ -26,9 +26,12 @@
   ;; http://www.mail-archive.com/guile-devel@gnu.org/msg07455.html
   ;; for detail
   ;;
-  (let* ((p (open-input-pipe command)))
+  (let ((p (open-input-pipe command)))
     (set-port-encoding! p "UTF-8")
     (let ((output (read-delimited "" p)))
+
+      (close-pipe p)
+
       (if (eof-object? output)
 	  ""
 	  output))))

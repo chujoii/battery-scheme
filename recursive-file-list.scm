@@ -54,7 +54,7 @@
 
 
 
-;;; help:  see doc    "guile File Tree Walk" : best= file-system-tree
+;;; help:  see doc    "guile File Tree Walk" : best= file-system-tree, total-file-size
 ;;; guile-old: ftw, nftw
 ;;; guile-2.0.5: file-system-tree, ftw, nftw
 (use-modules (ice-9 ftw))
@@ -98,6 +98,5 @@
 		#t)))
 
       file-list)))
-
 
 
