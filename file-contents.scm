@@ -27,6 +27,7 @@
 
 
 (use-modules (ice-9 rdelim))
+
 (define (file-contents filename)
   (define (read-file-contents file-port content)
     (let ((line (read-line file-port)))
@@ -43,5 +44,22 @@
       contents)))
 
 
+(define (first-line-of-file filename)
+  (let ((p (open-file filename "rb")))
+    (let ((contents (read-line p )))
+      (drain-input p)
+      (close p)
+      contents)))
 
 
+
+(define (read-lines-list filename)
+  ;; http://newsgroups.derkeiler.com/Archive/Comp/comp.lang.scheme/2008-05/msg00036.html
+  (call-with-input-file filename
+    (lambda (p)
+      (let loop ((line (read-line p))
+		 (result '()))
+	(if (eof-object? line)
+	    (begin (close p)
+		   (reverse result))
+	    (loop (read-line p) (cons line result)))))))

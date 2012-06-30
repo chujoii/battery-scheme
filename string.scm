@@ -54,8 +54,7 @@
 
 (define (string-cut s start end)
   (let ((strlen (string-length s)))
-    (string-drop (string-take s (if (< end 0) 
-				    (+ strlen end)
-				    end))
+    (string-drop (string-take s (cond ((< end 0) (+ strlen end))
+				      ((> end strlen) strlen)
+				      (else end)))
 		 start)))
-
