@@ -1,6 +1,4 @@
-; coding: utf-8
-
-;;;; string.scm ---  some string functions
+;;;; minimax.scm ---  some minmum, maximum and scale functions
 
 
 
@@ -29,7 +27,7 @@
 
 
 
-;;; Keywords: string cut
+;;; Keywords: min minimum max maximum list scale constrain
 
 
 
@@ -41,7 +39,7 @@
 
 ;;; History:
 
-;; Version 0.1 was created at 2012.february.12
+;; Version 0.1 was created at 2012.july.05
 
 
 
@@ -50,21 +48,22 @@
 
 
 
-(use-modules (ice-9 regex))
+(define (index-of-max lst)
+  (define (indmax im mm lst counter)
+    (if (null? lst)
+	im
+	(if (> (car lst) mm)
+	    (indmax counter (car lst) (cdr lst) (+ counter 1))
+	    (indmax im mm (cdr lst) (+ counter 1)))))
+  (indmax 0 (car lst) lst 0))
 
-(define (string-cut s start end)
-  (let ((strlen (string-length s)))
-    (string-drop (string-take s (cond ((< end 0) (+ strlen end))
-				      ((> end strlen) strlen)
-				      (else end)))
-		 start)))
+(define (scale x in-min in-max out-min out-max)
+  (let ((dividend (* (- x in-min) (- out-max out-min)))
+	(divisor (+ (- in-max in-min) out-min)))
+  (/ dividend
+     (if (= divisor 0) 1 divisor))))
 
-
-
-(define (search-first-string-in-list lst str)
-  (if (null? lst)
-      '()
-      (let ((str-ind (string-contains-ci (car lst) str)))
-	(if str-ind
-	    (car lst)
-	    (search-first-string-in-list (cdr lst) str)))))
+(define (constrain x a b)
+  (cond ((< x a) a)
+	((> x b) b)
+	(else    x)))

@@ -1,6 +1,4 @@
-; coding: utf-8
-
-;;;; string.scm ---  some string functions
+;;;; time.scm ---  some time functions
 
 
 
@@ -29,7 +27,7 @@
 
 
 
-;;; Keywords: string cut
+;;; Keywords: time runtime 
 
 
 
@@ -41,7 +39,7 @@
 
 ;;; History:
 
-;; Version 0.1 was created at 2012.february.12
+;; Version 0.1 was created at 2012.july.05
 
 
 
@@ -50,21 +48,6 @@
 
 
 
-(use-modules (ice-9 regex))
-
-(define (string-cut s start end)
-  (let ((strlen (string-length s)))
-    (string-drop (string-take s (cond ((< end 0) (+ strlen end))
-				      ((> end strlen) strlen)
-				      (else end)))
-		 start)))
-
-
-
-(define (search-first-string-in-list lst str)
-  (if (null? lst)
-      '()
-      (let ((str-ind (string-contains-ci (car lst) str)))
-	(if str-ind
-	    (car lst)
-	    (search-first-string-in-list (cdr lst) str)))))
+(define (runtime)
+  ((lambda (rt) (+ (car rt) (/ (cdr rt) 1000000)))
+   (gettimeofday)))

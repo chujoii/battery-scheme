@@ -1,6 +1,4 @@
-; coding: utf-8
-
-;;;; string.scm ---  some string functions
+;;;; netcat.scm ---  some netcat functions
 
 
 
@@ -29,7 +27,7 @@
 
 
 
-;;; Keywords: string cut
+;;; Keywords: netcat network nc
 
 
 
@@ -41,7 +39,7 @@
 
 ;;; History:
 
-;; Version 0.1 was created at 2012.february.12
+;; Version 0.1 was created at 2012.july.05
 
 
 
@@ -50,21 +48,15 @@
 
 
 
-(use-modules (ice-9 regex))
-
-(define (string-cut s start end)
-  (let ((strlen (string-length s)))
-    (string-drop (string-take s (cond ((< end 0) (+ strlen end))
-				      ((> end strlen) strlen)
-				      (else end)))
-		 start)))
-
-
-
-(define (search-first-string-in-list lst str)
-  (if (null? lst)
-      '()
-      (let ((str-ind (string-contains-ci (car lst) str)))
-	(if str-ind
-	    (car lst)
-	    (search-first-string-in-list (cdr lst) str)))))
+(define (nc net-host net-port)
+  (define (cycle-read stream result)
+    (let ((line (read-line stream)))
+      (if (eof-object? line)
+	  result
+	  (cycle-read stream (append result (list line)))))) ;; fixme? append -> cons ?
+  
+  (let ((s (socket PF_INET SOCK_STREAM 0)))
+    (connect s AF_INET (inet-pton AF_INET net-host) net-port)
+    (let ((res (cycle-read s '())))
+      (close-port s)
+      res)))
