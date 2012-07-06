@@ -62,12 +62,12 @@
 
 
 
-(define (num-list0 lst) ;; fixme -> to battary-scheme
-  ;; use: (display "raw-event-list: ")(write (num-list in-lst))(newline)
+(define (num-list0 lst)
+  ;; use: (display "raw-event-list: ")(write (num-list0 in-lst))(newline)
   (let ((num -1))
     (map (lambda (x)     (set! num (+ num 1)) (string-append (number->string num) "~" x)) lst)))
 
-(define (num-list lst) ;; fixme -> to battary-scheme
+(define (num-list lst)
   ;; use: (display "raw-event-list: ")(write (num-list in-lst))(newline)
   (define (nl li start)
     (if (eq? li '())

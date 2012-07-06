@@ -51,3 +51,10 @@
 
 (define (except-last-pair lst)
   (list-head lst (- (length lst) 1)))
+
+
+
+(define (make-increment-list n static-part dynamic-start)
+  ;; (make-increment-list 5 "abc" 3) => '("abc3" "abc4" "abc5" "abc6" "abc7")
+  (map (lambda (x) (format #f "~a~d" (cadr x) (+ (car x) dynamic-start)))
+       (num-list (make-list n static-part))))
