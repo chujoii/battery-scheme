@@ -1,6 +1,6 @@
 ; coding: utf-8
 
-;;;; print-list.scm ---  pretty print list
+;;;; logic.scm --- some logic function
 
 
 
@@ -29,7 +29,7 @@
 
 
 
-;;; Keywords: pretty print list
+;;; Keywords: logic list and
 
 
 
@@ -41,7 +41,7 @@
 
 ;;; History:
 
-;; Version 0.1 was created at 2011.december.06
+;; Version 0.1 was created at 2011.july.06
 
 
 
@@ -49,28 +49,12 @@
 
 
 
-(define (print-list-without-bracket list)
-  ;; print single or two dimension list
-  (cond ((null? list)
-	 (newline))
-	((pair? list)
-	 (print-list-without-bracket (car list))
-	 (print-list-without-bracket (cdr list)))
-	(else
-	 (write list)
-	 (display " "))))
+(define list-and
+    ;; http://stackoverflow.com/questions/387775/using-and-with-the-apply-function-in-scheme
+  (lambda x 
+    (if (null? x)
+	#t
+	(if (car x)
+	    (apply list-and (cdr x))
+	    #f))))
 
-
-
-(define (num-list0 lst) ;; fixme -> to battary-scheme
-  ;; use: (display "raw-event-list: ")(write (num-list in-lst))(newline)
-  (let ((num -1))
-    (map (lambda (x)     (set! num (+ num 1)) (string-append (number->string num) "~" x)) lst)))
-
-(define (num-list lst) ;; fixme -> to battary-scheme
-  ;; use: (display "raw-event-list: ")(write (num-list in-lst))(newline)
-  (define (nl li start)
-    (if (eq? li '())
-	'()
-	(cons (list start (car li)) (nl (cdr li) (+ start 1)))))
-  (nl lst 0))
