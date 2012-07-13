@@ -63,6 +63,15 @@
   (/ dividend
      (if (= divisor 0) 1 divisor))))
 
+
+(define (scale-proportional x in-max out-max)
+  ;; if in-min=0 and out-min=0
+  (cond ((= x 0) 0)
+	((= in-max 0) 0)
+	(else (/ (* x out-max)
+		 in-max))))
+
+
 (define (constrain x a b)
   (cond ((< x a) a)
 	((> x b) b)
