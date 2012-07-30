@@ -46,6 +46,7 @@
 ;;; Code:
 
 
+(use-modules (ice-9 rdelim))
 
 
 (define (nc net-host net-port)
