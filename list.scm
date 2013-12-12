@@ -82,3 +82,25 @@
   ;; index              0   1   2   3   4   5   6   7   8   9   10   11 12) 5)
   ;; return           ("a" "b" "c" "d" "e"     "g" "h" "i" "j" "k" "l" "m")
   (append (list-head lst k) (list-tail lst (+ k 1))))
+
+
+
+(define (rnd-index num)
+  ;; (rnd-index 5)
+  ;; return for example: (1 3 4 2 0)
+
+  (define (rnd-r lst)
+    (let ((len (length lst)))
+      (if (= len 0)
+	  '()
+	  (let ((rnd (random len)))
+	    (cons (list-ref lst rnd) (rnd-r (list-unref lst rnd)))))))
+
+  (rnd-r (xrange 0 (- num 1))))
+	  
+
+
+
+(define (randomize-list lst)
+  (map (lambda (x) (list-ref lst x)) (rnd-index (length lst))))
+
