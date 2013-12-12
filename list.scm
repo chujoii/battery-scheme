@@ -58,3 +58,27 @@
   ;; (make-increment-list 5 "abc" 3) => '("abc3" "abc4" "abc5" "abc6" "abc7")
   (map (lambda (x) (format #f "~a~d" (cadr x) (+ (car x) dynamic-start)))
        (num-list (make-list n static-part))))
+
+
+
+
+(define list-and
+    ;; http://stackoverflow.com/questions/387775/using-and-with-the-apply-function-in-scheme
+  (lambda x 
+    (if (null? x)
+        #t
+        (if (car x)
+            (apply list-and (cdr x))
+            #f))))
+
+(define (list-from-to lst start end)
+  ;; (list-from-to (list 0 1 2 3 4 5 6 7 8 9) 2 7)
+  ;; return:                (2 3 4 5 6 7)
+  (list-tail (list-head lst (+ end 1)) start))
+
+(define (list-unref lst k)
+  ;; return new list without k-element
+  ;; (list-unref (list "a" "b" "c" "d" "e" "f" "g" "h" "i" "j" "k" "l" "m") 5)
+  ;; index              0   1   2   3   4   5   6   7   8   9   10   11 12) 5)
+  ;; return           ("a" "b" "c" "d" "e"     "g" "h" "i" "j" "k" "l" "m")
+  (append (list-head lst k) (list-tail lst (+ k 1))))
