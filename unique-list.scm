@@ -48,7 +48,8 @@
 ;;; Code:
 
 
-
+(define (xrange from to)
+  (if (= from to) (list to) (cons from (xrange (+ from 1) to))))
 
 (define (unique-list list)
   (define (element-of-set? x set)
