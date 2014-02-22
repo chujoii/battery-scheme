@@ -104,3 +104,47 @@
 (define (randomize-list lst)
   (map (lambda (x) (list-ref lst x)) (rnd-index (length lst))))
 
+
+
+
+(define (list-fill lst fill-len fill-symbol after)
+  ;; (list-fill `(1 2 3) 5 0 #t) -> (1 2 3 0 0)
+  ;; (list-fill `(1 2 3) 5 0 #f) -> (0 0 1 2 3)
+  (let ((real-len (length lst)))
+    (if (>= real-len fill-len)
+	lst
+	(if after
+	    (append lst (make-list (- fill-len real-len) fill-symbol))
+	    (append (make-list (- fill-len real-len) fill-symbol) lst)))))
+
+
+
+(define (list-to-num list-of-bit)
+  ;; fixme?: input list contains only 1 or 0 !
+  ;; so (list-to-num `(1 0 1)) = 5
+  (define (list-to-num-recursive lst counter)
+    (if (null? lst)
+	`()
+	(cons (* (car lst) (ash 1 counter))
+	      (list-to-num-recursive (cdr lst) (1- counter)))))
+  
+  (apply logior (list-to-num-recursive list-of-bit (1- (length list-of-bit)))))
+
+
+
+(define (num-to-list-reversed num base)
+  ;; (num-to-list 312 10) -> (2 1 3)
+  ;; (num-to-list 312 2) -> (0 0 0 1    1 1 0 0    1)
+  ;; length of result - different (fixme? use: list-fill)
+  (if (< num base)
+      (cons num `())
+      (cons (remainder num base)
+	    (num-to-list-reversed (quotient num base) base))))
+
+
+(define (num-to-list number base)
+  ;; (num-to-list 312 10) -> (3 1 2)
+  ;; (num-to-list 312 2) -> (1    0 0 1 1    1 0 0 0)
+  ;; length of result - different (fixme? use: list-fill)
+  
+  (reverse (num-to-list-reversed number base)))
