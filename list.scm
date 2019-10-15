@@ -97,7 +97,15 @@
 	    (cons (list-ref lst rnd) (rnd-r (list-unref lst rnd)))))))
 
   (rnd-r (xrange 0 (- num 1))))
-	  
+
+
+;; for example: generate list with three random number in [0,1):
+;;    (create-list-of-n-element-filled-by-function 3 random:uniform)
+;; result: (0.103 0.052 0.243)
+(define (create-list-of-n-element-filled-by-evaluated-function n function)
+  (if (<= n 0)
+      '()
+      (cons (function) (create-list-of-n-element-filled-by-evaluated-function (- n 1) function))))
 
 
 
