@@ -60,7 +60,24 @@
 	   (iter (cdr x) (cdr y)))))
 
   (sqrt (iter a b)))
+;;; unit-testing for euclidean-distance
+;;(format #t "Euclidean distance between point (1.0 2.0) and (3.0 4.0): ~7,2f (correct answer: 2.83)\n"
+;;	(euclidean-distance (list 1.0 2.0) (list 3.0 4.0)))
 
-; unit-testing for euclidean-distance
-;(format #t "\nEuclidean distance between point (1.0 2.0) and (3.0 4.0): ~7,2f (correct answer: 2.83)\n"
-;	(euclidean-distance (list 1.0 2.0) (list 3.0 4.0)))
+
+
+(define (sum-sub-vectors function a b)
+  (map function a b))
+;;; unit-testing for sum-vectors
+;;(format #t "Adding vectors (1.0 2.0) and (3.0 4.0): ~a\tcorrect answer: (4.0 6.0)\n"
+;;	(sum-sub-vectors + (list 1.0 2.0) (list 3.0 4.0)))
+;;(format #t "Subtracting vectors (1.0 2.0) and (3.0 4.0): ~a\tcorrect answer: (-2.0 -2.0)\n"
+;;	(sum-sub-vectors - (list 1.0 2.0) (list 3.0 4.0)))
+
+(define (mul-div-vector-const function a const)
+  (map (lambda (x) (function x const)) a))
+;;; unit-testing for sum-vectors
+;;(format #t "Multiple vector (3.0 4.0) to constant 2: ~a\tcorrect answer: (6.0 8.0)\n"
+;;	(mul-div-vector-const * (list 3.0 4.0) 2))
+;;(format #t "Divide vector (3.0 4.0) to constant 2: ~a\tcorrect answer: (1.5 2.0)\n"
+;;	(mul-div-vector-const / (list 3.0 4.0) 2))
