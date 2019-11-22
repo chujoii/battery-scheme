@@ -60,6 +60,16 @@
        (num-list (make-list n static-part))))
 
 
+;; form in-list generate out-list with elements from index-list
+;; in-list:    (a b c d e f g h i g)
+;; index-list: (0   2     5       9)
+;; out-list: (a c f g)
+(define (list-from-index-list index in-list)
+  (if (null? index)
+      '()
+      (cons (list-ref in-list (car index))
+	    (list-from-index-list (cdr index) in-list))))
+
 
 
 (define list-and
