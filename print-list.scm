@@ -74,3 +74,16 @@
 	'()
 	(cons (list start (car li)) (nl (cdr li) (+ start 1)))))
   (nl lst 0))
+
+
+;; generate string with start "list"
+;; usage: (print-list-as-list "~d" (list 1 2 (list 3 4 5)))
+;; result: "(list 1 2 (list 3 4 5))"
+(define (print-list-as-list fmt ls)
+  (if (null? ls)
+      ""
+      (if (not (list? ls))
+	  (format #f fmt ls)
+	  (string-append "(list "
+			 (string-join (map (lambda (x) (print-list-as-list fmt x)) ls))
+			 ")"))))
