@@ -84,6 +84,6 @@
       ""
       (if (not (list? ls))
 	  (format #f fmt ls)
-	  (string-append "(list "
+	  (string-append "\n(list "
 			 (string-join (map (lambda (x) (print-list-as-list fmt x)) ls))
 			 ")"))))
