@@ -50,7 +50,7 @@
 
 ;; max-angle-unit == 360 for degree or (* 2 *PI*) for radians
 (define (constrain-angle angle max-angle-unit)
-  (let ((a (remainder angle max-angle-unit)))
+  (let ((a (euclidean-remainder angle max-angle-unit)))
     (if (< a 0.0)
 	(+ a max-angle-unit)
 	a)))

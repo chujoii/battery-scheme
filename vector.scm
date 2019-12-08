@@ -46,13 +46,16 @@
 
 ;;; Code:
 
-
+(load "angle.scm")
 
 (define (square x) (* x x))
 
 
-
+;; for distance need add: (sqrt (+ (euclidean-distance a b) (euclidean-distance c d) (euclidean-distance e f) ...))
 (define (euclidean-distance a b)
+  (square (- a b)))
+
+(define (euclidean-distance-vector a b)
   (define (iter x y)
     (if (or (null? x) (null? y))
 	0.0
@@ -60,9 +63,23 @@
 	   (iter (cdr x) (cdr y)))))
 
   (sqrt (iter a b)))
-;;; unit-testing for euclidean-distance
+;;; unit-testing for euclidean-distance-vector
 ;;(format #t "Euclidean distance between point (1.0 2.0) and (3.0 4.0): ~7,2f (correct answer: 2.83)\n"
-;;	(euclidean-distance (list 1.0 2.0) (list 3.0 4.0)))
+;;	(euclidean-distance-vector (list 1.0 2.0) (list 3.0 4.0)))
+
+
+;; for distance need add: (sqrt (+ (angle-distance a b) (angle-distance c d) (angle-distance e f) ...))
+(define (angle-distance a b)
+  (square (min-angle-between-two-angles a b 360)))
+
+(define (angle-distance-vector a b)
+  (define (iter x y)
+    (if (or (null? x) (null? y))
+	0.0
+	(+ (square (min-angle-between-two-angles (car x) (car y) 360))
+	   (iter (cdr x) (cdr y)))))
+
+  (sqrt (iter a b)))
 
 
 
