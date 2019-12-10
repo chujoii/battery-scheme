@@ -47,15 +47,27 @@
 
 
 
-
-(define (index-of-max lst)
+;; find extremum values (minimun or maximum) and index
+;; 
+;; usage: (extremum (list of many values) comparsion)
+;; comparsion for min: <
+;; comparsion for max: >
+;; return (list index value)
+;;
+;; example (extremum (list 5 6 7 8 1 2 3) <)
+;; return (cons 4 1)
+(define (extremum lst comparsion)
   (define (indmax im mm lst counter)
     (if (null? lst)
-	im
-	(if (> (car lst) mm)
+	(cons im mm)
+	(if (comparsion (car lst) mm)
 	    (indmax counter (car lst) (cdr lst) (+ counter 1))
 	    (indmax im mm (cdr lst) (+ counter 1)))))
   (indmax 0 (car lst) lst 0))
+;; unit-testing
+;(format #t "(extremum (list 5 6 7 8 1 2 3) <) = (4 1) ? ~a\n" (extremum (list 5 6 7 8 1 2 3) <))
+;(format #t "(extremum (list 5 6 7 8 1 2 3) >) = (3 8) ? ~a\n" (extremum (list 5 6 7 8 1 2 3) >))
+
 
 (define (scale x in-min in-max out-min out-max)
   (let ((dividend (* (- x in-min) (- out-max out-min)))
