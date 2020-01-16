@@ -62,4 +62,4 @@
     (cond ((null? src-list) uniq-list)
 	  ((not (element-of-set? (car src-list) uniq-list)) (unique (cdr src-list) (cons (car src-list) uniq-list)))
 	  (else (unique (cdr src-list) uniq-list))))
-  (unique list nil))
+  (unique list '()))
