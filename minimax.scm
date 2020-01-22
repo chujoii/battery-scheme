@@ -52,7 +52,7 @@
 ;; usage: (extremum (list of many values) comparsion)
 ;; comparsion for min: <
 ;; comparsion for max: >
-;; return (list index value)
+;; return (index value)
 ;;
 ;; example (extremum (list 5 6 7 8 1 2 3) <)
 ;; return (cons 4 1)
